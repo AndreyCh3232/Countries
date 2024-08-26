@@ -10,14 +10,27 @@
 </head>
 
 <body>
-    <h1>Countries</h1>
+    <div class="main-container">
+        <h1>Countries</h1>
 
-    <input type="text" id="country-input" placeholder="Enter country name">
-    <button id="get-info-button">Get Country Info</button>
-    <pre id="country-info"></pre>
+        <form id="country-form">
+            <input type="text" id="country-input" placeholder="Enter country name">
+            <button type="submit">Get Country Info</button>
+        </form>
+
+        <h2 id="country-name"></h2>
+        <img id="country-flag" alt="Country Flag" style="display:none;">
+        <p id="country-population"></p>
+        <p id="country-area"></p>
+        <pre id="country-info"></pre>
+        <button id="clear-cache-button">Clear Cache</button>
+    </div>
+
+    <div id="loader" style="display:none;">Loading...</div>
 
     <script src="lib/jquery-3.7.1.js"></script>
     <script src="js/countries.js"></script>
+    <script src="js/countryService.js"></script>
 </body>
 
 </html>
