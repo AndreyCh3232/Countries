@@ -29,18 +29,20 @@ function renderInfo(country) {
     const mapUrl = `https://www.google.com/maps?q=${latlng[0]},${latlng[1]}`
     $('#country-map-link').attr('href', mapUrl).show()
 
+    $('#country-info').html('')
+
     if (country.borders && country.borders.length > 0) {
-        $('#country-info').append('<h3>Neighboring Countries:</h3>')
+        $('#country-info').append('<div id="neighboring-countries"><h3>Neighboring Countries:</h3><div class="neighboring-country-list"></div></div>')
         country.borders.forEach(code => {
             getCountryByCode(code, function (neighbor) {
                 if (neighbor) {
-                    $('#country-info').append(`<a href="#" class="neighbor-link" data-code="${code}">${neighbor.name.common}</a><br>`)
+                    $('.neighboring-country-list').append(`<a href="#" class="neighboring-country" data-code="${code}">${neighbor.name.common}</a>`)
                 }
             })
         })
 
-        $('#country-info').on('click', '.neighbor-link', function (event) {
-            event.preventDefault();
+        $('#country-info').off('click').on('click', '.neighboring-country', function (event) {
+            event.preventDefault()
             const neighborCode = $(this).data('code')
             getCountryByCode(neighborCode, renderInfo)
         })
