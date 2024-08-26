@@ -24,7 +24,10 @@ function renderInfo(country) {
     $('#country-flag').attr('src', country.flags.png).show()
     $('#country-population').text(`Population: ${country.population.toLocaleString()}`)
     $('#country-area').text(`Area: ${country.area.toLocaleString()} km²`)
-    $('#country-info').text('')
+
+    const latlng = country.latlng
+    const mapUrl = `https://www.google.com/maps?q=${latlng[0]},${latlng[1]}`
+    $('#country-map-link').attr('href', mapUrl).show()
 }
 
 $(document).ready(function () {
