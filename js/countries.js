@@ -19,5 +19,17 @@ function onGetCountryInfo() {
 }
 
 function renderInfo(data) {
-    console.log('Rendering...')
+    const country = data[0]
+    const countryInfo = `
+        Name: ${country.name.common}
+        Capital: ${country.capital}
+        Region: ${country.region}
+        Population: ${country.population.toLocaleString()}
+        Area: ${country.area.toLocaleString()} km²
+    `
+    $('#country-info').text(countryInfo)
 }
+
+$(document).ready(function () {
+    $('#get-info-button').on('click', onGetCountryInfo)
+})
