@@ -1,15 +1,15 @@
 'use strict'
 
-function getCountryByName(name, cb) {
+function getCountryByName(code, cb) {
     const cacheKey = 'countryCache'
     const cache = JSON.parse(localStorage.getItem(cacheKey)) || {}
 
-    if (cache[name]) {
+    if (cache[code]) {
         console.log('Returning data from cache')
-        cb(cache[name])
+        cb(cache[code])
     } else {
         $.ajax({
-            url: `https://restcountries.com/v3.1/name/${name}`,
+            url: `https://restcountries.com/v3.1/name/${code}`,
             method: 'GET',
             success: function (data) {
                 cache[name] = data[0]

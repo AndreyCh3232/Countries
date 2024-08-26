@@ -28,6 +28,25 @@ function renderInfo(country) {
     const latlng = country.latlng
     const mapUrl = `https://www.google.com/maps?q=${latlng[0]},${latlng[1]}`
     $('#country-map-link').attr('href', mapUrl).show()
+
+    if (country.borders && country.borders.length > 0) {
+        $('#country-info').append('<h3>Neighboring Countries:</h3>')
+        country.borders.forEach(code => {
+            getCountryByCode(code, function (neighbor) {
+                if (neighbor) {
+                    $('#country-info').append(`<a href="#" class="neighbor-link" data-code="${code}">${neighbor.name.common}</a><br>`)
+                }
+            })
+        })
+
+        $('#country-info').on('click', '.neighbor-link', function (event) {
+            event.preventDefault();
+            const neighborCode = $(this).data('code')
+            getCountryByCode(neighborCode, renderInfo)
+        })
+    } else {
+        $('#country-info').append('<p>No neighboring countries.</p>')
+    }
 }
 
 $(document).ready(function () {
